@@ -39,8 +39,3 @@
         </ul>
     </div>
 @endsection
-@section('scripts')
-    <script>
-        $('.abute').css('box-shadow', '0px 8px 5px rgb(122 122 122) ');
-    </script>
-@endsection

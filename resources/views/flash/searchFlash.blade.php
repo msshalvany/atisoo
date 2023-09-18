@@ -17,7 +17,7 @@
     <section class="section1">
         <img src="{{ $info->logo }}" class="logo-img" alt="موردی یافت نشد"><br>
         <h1 style="text-align: center;display: block;width: 100%;"> موتور جستجوی فایل فلش</h1><br>
-        <div class="count-user-file">
+        <div class="count-file">
             {{-- <div class="count-user">
                 <div class="icon"><i class="fa fa-user"></i></div>
                 <div class="count">{{ $userCount }}</div>
@@ -32,7 +32,7 @@
         <p style="text-align: center;padding: 0 12px"> در صورتی که فایلی را پیدا نکردید در <span style="color: red"> چت با مدیریت </span>  پیام دهید  </p><br>
         <form action="{{ route('search') }}" class="search" method="get">
             <input type="text" name="text"
-                placeholder="نام روی برد یا برچسب پشت دستگاه یا دوربین را تایپ کنید ......." />
+                placeholder="دنبال چی می گردی ؟ همین جا سرچ کن......." />
             <button><i style="color: rgb(88, 88, 88)" class="fa fa-search"></i></button>
         </form>
     </section>
@@ -170,6 +170,6 @@
 @endsection
 @section('scripts')
     <script>
-        $('.dropdao-btn').eq(1).css('box-shadow', '0px 8px 5px rgb(54 0 124)');
+        $('.dropdao-btn').eq(2).css('box-shadow', '0px 8px 5px rgb(177 0 0)');
     </script>
 @endsection

@@ -15,7 +15,7 @@ class RsetCamController extends Controller
             if (File::exists('resetCam/' . $i)) {
                 $maxDevice = rsetCam::max('id2');
                 if ($maxDevice == '') {
-                    $maxDevice = 2000000;
+                    $maxDevice = 3000000;
                 }
                 $maxDevice++;
                 $maxSort = rsetCam::max('sort');

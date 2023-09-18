@@ -25,7 +25,7 @@ class DeviceController extends Controller
             if (File::exists('file/' . $i)) {
                 $maxDevice = device::max('id2');
                 if ($maxDevice == '') {
-                    $maxDevice = 3000000;
+                    $maxDevice = 6000000;
                 }
                 $maxDevice++;
                 $folderName = $maxDevice;

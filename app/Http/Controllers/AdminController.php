@@ -26,7 +26,7 @@ class AdminController extends Controller
             }else {
                 if ($admin->username == $request->username && $admin->password == $request->password) {
                     session(['admin'=>$admin->id]);
-                    return redirect('dashbord');
+                    return redirect('dashbord/chatlist');
                 } else {
                     return redirect()->back()->with('eroore','salam');
                 }

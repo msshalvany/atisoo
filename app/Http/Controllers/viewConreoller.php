@@ -16,17 +16,29 @@ use App\Models\shop;
 use App\Models\user;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class viewConreoller extends Controller
 {
 
     public function index()
     {
+
+        $atisoo_phon =  Cookie::get('atisoo_phon');
+        $atisoo_password =  Cookie::get('atisoo_password');
+        $user = User::where('phon', $atisoo_phon)->first();
         $device = 'null';
         $userCount = count(user::all());
         $fileCount = count(device::all());
         $info = info::first();
-        return view('flash.index', ['device' => $device, 'info' => $info, 'fileCount' => $fileCount, 'userCount' => $userCount]);
+        if ($user) {
+            if ($user->phon == $atisoo_phon && $user->password == $atisoo_password) {
+                session(['user' => $user->id]);
+                return view('flash.index', ['device' => $device, 'info' => $info, 'fileCount' => $fileCount, 'userCount' => $userCount]);
+            }
+        } else {
+            return view('flash.index', ['device' => $device, 'info' => $info, 'fileCount' => $fileCount, 'userCount' => $userCount]);
+        }
     }
 
     public function register()
@@ -50,7 +62,7 @@ class viewConreoller extends Controller
     {
         $deviceShop =  shop::where('userId', session()->get('user'))->get();
         $deviceByed =  byed::where('userId', session()->get('user'))->get();
-        byed::whereDate("created_at", '<',  Carbon::now()->subDays(5))->delete();
+        byed::where("created_at", '<=',  Carbon::now()->subDays(5))->delete();
         return view('flash.panel', ['deviceShop' => $deviceShop, 'deviceByed' => $deviceByed]);
     }
 
@@ -154,7 +166,7 @@ class viewConreoller extends Controller
     }
     public function userList()
     {
-        $user = user::paginate(250);
+        $user = user::paginate(1000);
         $count = count(user::all());
         return view('admin.userList', ['user' => $user, 'count' => $count]);
     }
@@ -196,5 +208,9 @@ class viewConreoller extends Controller
             $messegs = messegeChat::orderBy('id', 'desc')->where('chate_id', $chate->id)->take(250)->get();
             return View('flash.chat', ['user' => $user, 'messegs' => $messegs]);
         }
+    }
+    public function ruls()
+    {
+        return view('flash.ruls');
     }
 }

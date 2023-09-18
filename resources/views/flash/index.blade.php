@@ -22,9 +22,31 @@
         .searchViwe {
             display: none
         }
+
+        .enamad {
+            position: fixed;
+            bottom: 18px;
+            right: 8px;
+        }
     </style>
 @endsection
 @section('content')
+    <div class="learn-ios">
+        <div style="position: relative">
+            <div class="learn-ios-cancel"><i class="fa fa-times"></i></div>
+            <div class="learn-ios-text">
+                <p>1 - وارد تنظیمات مرورگر خود شوید</p>
+                <p>2 - گزینه Add to home screan را کلیک کنید</p>
+                <img style="margin-top: 12px" width="80%" src="flash/img/learn-ios.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="enamad">
+        <a referrerpolicy="origin" target="_blank"
+            href="https://trustseal.enamad.ir/?id=345037&amp;Code=pEkNCaiy1BJE34X2k4QV"><img referrerpolicy="origin"
+                src="https://Trustseal.eNamad.ir/logo.aspx?id=345037&amp;Code=pEkNCaiy1BJE34X2k4QV" alt=""
+                style="cursor:pointer" id="pEkNCaiy1BJE34X2k4QV"></a>
+    </div>
     <section class="section1">
         <img src="{{ $info->logo }}" class="logo-img" alt="موردی یافت نشد"><br>
         <h1>خدمات آنلاین دوربین مداربسته و dvr , nvr</h1><br>
@@ -32,26 +54,65 @@
                 style="color: red">ایتا</span> : <span >09217902890</span> </p>
         <p style="text-align: center"> در صورتی که فایلی را پیدا نکردید در <span style="color: red">تلگرام</span> یا <span
                 style="color: red">ایتا</span> عکس از پشت و روی برد بفرستید تا فوری برای شما ارسال شود</p><br> --}}
-        <div class="count-user-file">
-            <div class="count-user">
-                <div class="icon"><i class="fa fa-user"></i></div>
-                <div class="count">{{ $userCount }}</div>
-                <p>تعداد ثبت نام کنندگان</p>
+        <div class="count-user-appps">
+
+            <div class="apps-links">
+                <p style="font-size: 18px">دانلود اپلیکیشن : خدمات آنلاین مداربسته . آتی سو</p>
+                <div class="apps-links-item">
+                    {{-- <div><img width="150px" src="flash/img/logo-app.png" alt=""></div> --}}
+                    <a href="/ruls"><img width="160px"src="flash/img/google-play-download.png" alt=""></a>
+                    <a href="https://cafebazaar.ir/app/io.gonative.android.jykprp">
+                        <div><img width="150px" src="flash/img/bazar.png" alt=""></div>
+                    </a>
+                    <a href="flash/Atisoo.apk">
+                        <div><img width="150px" src="flash/img/direct-download.png" alt=""></div>
+                    </a>
+                    <div class="learn-ios-btn"><img width="160px"src="flash/img/iOS.png" alt=""></div>
+                    <a href="/ruls"><img width="160px"src="flash/img/ruls.png" alt=""></a>
+                    <div class="count-user">
+                        <div class="icon"><i class="fa fa-user"></i></div>
+                        <div class="count">{{ $userCount }}</div>
+                        <p>تعداد ثبت نام کنندگان</p>
+                    </div>
+                </div>
             </div>
-            {{-- <div class="file-count">
-                <div class="icon"><i class="fa fa-file"></i></div>
-                <div class="count">{{ $fileCount }}</div>
-                <p>تعداد فایل ها</p>
-            </div> --}}
         </div>
         <div class="circle-menue">
-            <a href="/resetDe"><p>ریست پسورد DVR , NVR</p><span style="color: red;text-shadow: none">(برای عموم مردم)</span></a>
-            <a href="/resetCa"><p>ریست پسورد دوربین ip</p><span style="color: red;text-shadow: none">(برای عموم مردم)</span></a>
-            <a class="updateBtn" href=""><p>جستجوی فایل آپدیت</p><span style="color: black;text-shadow: none;font-size: 12px">(برای نصاب ها و  تعمیرکاران)</span></a>
-            <a href="/searchViwe"><p>جستجوی فایل فلش</p><span style="color: black;text-shadow: none;font-size: 12px">(برای نصاب ها و تعمیرکاران)</span></a>
-            <a href="/byForYou"><P>خرید فایل فلش  از تعمیرکاران</P></a>
-            <a class="updateBtnBy" href=""><p>خرید  فایل آپدیت از تعمیرکاران</p></a>
-            <a href="/abute"><p>درباره ما</p></a>
+            <a href="/resetDe">
+                <p>ریست پسورد DVR , NVR</p><span style="color: red;text-shadow: none">(برای عموم مردم)</span>
+            </a>
+            <a class="developer">
+                <p>پکیج های آموزشی</p><span style="color: red;text-shadow: none">(برای عموم مردم)</span>
+            </a>
+            <a href="/resetCa">
+                <p>ریست پسورد دوربین ip</p><span style="color: red;text-shadow: none;font-size: 12px">(برای نصاب ها و
+                    تعمیرکاران)</span>
+            </a>
+            <a class="updateBtn developer">
+                <p>جستجوی فایل آپدیت</p><span style="color: red;text-shadow: none;font-size: 12px">(برای نصاب ها و
+                    تعمیرکاران)</span>
+            </a>
+            <a class="updateBtn developer">
+                <p style="font-size: 20px">دانلود کاتالوگ ها و دفترچه ها</p><span
+                    style="color: red;text-shadow: none;font-size: 12px">(برای نصاب ها و
+                    تعمیرکاران)</span>
+            </a>
+            <a href="/searchViwe">
+                <p>جستجوی فایل فلش</p><span style="color: black;text-shadow: none;font-size: 12px">(برای
+                    تعمیرکاران)</span>
+            </a>
+            <a href="/byForYou">
+                <P>خرید فایل فلش از تعمیرکاران</P>
+            </a>
+            <a class="updateBtnBy developer">
+                <p>خرید فایل آپدیت از تعمیرکاران</p>
+            </a>
+            <a class="updateBtn developer">
+                <p>همکاری با ما و کسب درآمد</p>
+            </a>
+            <a href="/abute">
+                <p>درباره ما</p>
+            </a>
         </div>
     </section>
 
@@ -78,22 +139,37 @@
             </li>
         </ul>
     </session> --}}
-    {{-- <a href="/other">
+    <a href="https://ibaladam.ir/">
         <div class="others">
-            لیست نصاب ها و فروشندگان دوربین های مدار بسته
-            <span style="color: red">تبلیغ رایگان</span>
+            اتاق گفتگو بساز و هر سوالی در مورد دوربین های مداربسته داری بپرس و یا تبلیغ کن (کاملا رایگان)
+            {{-- <span style="color: red">تبلیغ رایگان</span> --}}
         </div>
-    </a> --}}
+    </a>
 @endsection
 @section('scripts')
     <script !src="">
-        $('.updateBtn').click(function(e) {
-            e.preventDefault();
-            alertSucsses('در حال توسعه به زودی فعال میشود')
-        });
-        $('.updateBtnBy').click(function(e) {
-            e.preventDefault();
-            alertSucsses('در حال توسعه به زودی فعال میشود')
-        });
+       
+        // $('.updateBtn').click(function(e) {
+        //     e.preventDefault();
+        //     alertSucsses('در حال توسعه به زودی فعال میشود')
+        // });
+        // $('.updateBtnBy').click(function(e) {
+        //     e.preventDefault();
+        //     alertSucsses('در حال توسعه به زودی فعال میشود')
+        // });
     </script>
+    @if (session()->get('remember') == 1)
+        <script>
+            document.cookie = "atisoo_phon = {{ session()->get('atisoo_phon') }}";
+            document.cookie = "atisoo_password = {{ session()->get('atisoo_password') }}";
+        </script>
+    @endif
+
+    {{-- <script>
+        atisoo_phon = getCookie("atisoo_phon")
+        atisoo_password = getCookie("atisoo_password")
+        $(window).on("load", function() {
+            
+        });
+    </script> --}}
 @endsection

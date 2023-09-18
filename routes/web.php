@@ -28,6 +28,8 @@ Route::middleware(\App\Http\Middleware\user::class)->get('/resetCa', [\App\Http\
 Route::middleware(\App\Http\Middleware\user::class)->get('/resetDe', [\App\Http\Controllers\viewConreoller::class, 'resetDevice'])->name('resetDevice');
 Route::middleware(\App\Http\Middleware\user::class)->get('/searchViwe', [\App\Http\Controllers\viewConreoller::class, 'searchViwe'])->name('searchViwe');
 Route::middleware(\App\Http\Middleware\user::class)->get('/showDevice/{id}', [\App\Http\Controllers\viewConreoller::class, 'showDevice'])->name('showDevice');
+Route::get('/ruls', [\App\Http\Controllers\viewConreoller::class, 'ruls'])->name('ruls');
+
 //==============view=============
 
 

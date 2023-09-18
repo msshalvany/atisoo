@@ -34,8 +34,8 @@
                             <div><br>
                                 توضیحات  متنی:
                                 <br>
-                                <p>
-                                    {{$item->description}}
+                                <p style="white-space: pre-wrap">
+                                    {{ $item->description }}
                                 </p>
                             </div><br>
                         </div>

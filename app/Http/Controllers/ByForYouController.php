@@ -13,7 +13,7 @@ class ByForYouController extends Controller
     {
         $maxDevice = byForYou::max('id2');
         if ($maxDevice == '') {
-            $maxDevice = 5000000;
+            $maxDevice = 7000000;
         }
         $maxDevice++;
         $valid = Validator::make($request->all(), [

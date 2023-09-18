@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function ()
         {
-            byed::whereDate("created_at", '<',  Carbon::now()->subDays(5))->delete();
+            byed::where("created_at", '<=',  Carbon::now()->subDays(5))->delete();
         })->everyMinute();
     }
 

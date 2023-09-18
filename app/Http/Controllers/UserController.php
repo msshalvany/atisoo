@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Evryn\LaravelToman\CallbackRequest;
 use Evryn\LaravelToman\Facades\Toman;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
@@ -87,6 +89,11 @@ class UserController extends Controller
             if ($user) {
                 if ($user->phon == $request->phon && $user->password == $request->password) {
                     session(['user' => $user->id]);
+                    if ($request->remember == 'on') {
+                        Cookie::queue('atisoo_phon',$request->phon);
+                        Cookie::queue('atisoo_password',$request->password);
+                        return redirect('/')->with('remember', 1)->with('atisoo_password', $request->password,)->with('atisoo_phon', $request->phon);
+                    }
                     return redirect('/');
                 }
             }
@@ -96,6 +103,8 @@ class UserController extends Controller
 
     public function logout()
     {
+        Cookie::queue('atisoo_phon',"delete");
+        Cookie::queue('atisoo_password',"delete");
         session()->forget('user');
         return redirect()->back();
     }
@@ -242,6 +251,8 @@ class UserController extends Controller
 
     public function downloadeFile($file, $order, $type)
     {
+        $file  =  Crypt::decrypt($file);
+        $type  =  Crypt::decrypt($type);
         $device = device::find($file);
         return Response::download(json_decode($device->$type)[$order]);
     }
@@ -261,7 +272,7 @@ class UserController extends Controller
 
     public function checkPay(CallbackRequest $request)
     {
-                $payment = $request->amount(session()->get('count')*1000)->verify();
+        $payment = $request->amount(session()->get('count') * 1000)->verify();
         if ($payment->successful()) {
             $user = session()->get('user');
             $devices = shop::where('userId', $user)->get();

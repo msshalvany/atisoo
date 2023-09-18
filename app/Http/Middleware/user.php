@@ -17,7 +17,8 @@ class user
     public function handle(Request $request, Closure $next)
     {
         if (!session()->has('user')) {
-            return redirect('/')->with('errorLogin',1);
+            //return redirect('/')->with('errorLogin',1);
+            return redirect('/register');
         }
         return $next($request);
     }

@@ -146,15 +146,12 @@
                             @endphp
                             <div class="end-time">
                                 <b>زمان باقی مانده برای دانلود فایل :</b><br><br>
-                                <span>{{ $d }} روز</span> , <span>{{ $h }} ساعت</span> , <span
-                                    id="i">{{ $i }} </span>دقیقه , <span
+                                <span id="d">{{ $d }} روز</span> , <span>{{ $h }}
+                                    ساعت</span> , <span id="i">{{ $i }} </span>دقیقه , <span
                                     id="s">{{ $s }}</span> ثانیه
                             </div>
                             <li class="flash-cont">
                                 <div class="flash-by-cont">
-                                    {{-- {{ $endTime }} <br>
-                                    {{ now() }} <br>
-                                    {{ $timeForEnd}}<br> --}}
                                     <ul>
                                         @if ($deviceByed->flash != 'false')
                                             @php
@@ -163,7 +160,7 @@
                                             @endphp
                                             <li>دانلود فایل های فلش ارائه شده:<br><br>
                                                 @foreach ($linkFlashs as $key => $item)
-                                                    <a href="{{ route('downloadeFile', ['file' => $flashId, 'order' => $key, 'type' => 'flash']) }}"
+                                                    <a href="{{ route('downloadeFile', ['file' => Crypt::encrypt($flashId), 'order' => $key, 'type' => Crypt::encrypt('flash')]) }}"
                                                         class="link-download">دانلود فایل {{ $key + 1 }}</a><br>
                                                 @endforeach
                                             </li>
@@ -176,9 +173,10 @@
                                             @endphp
                                             <li>دانلود فایل های ایپروم ارائه شده:<br><br>
                                                 @foreach ($linkIprom as $key => $item)
-                                                    <a href="{{ route('downloadeFile', ['file' => $IpromId, 'order' => $key, 'type' => 'iprom']) }}"
+                                                    <a href="{{ route('downloadeFile', ['file' => Crypt::encrypt($IpromId), 'order' => $key, 'type' => Crypt::encrypt('iprom')]) }}"
                                                         class="link-download">دانلود فایل {{ $key + 1 }}</a><br>
                                                 @endforeach
+                                               
                                             </li>
                                         @endif
                                     </ul>
@@ -213,14 +211,20 @@
                                 </div>
                             </li>
                             <br />
+                            <span style="color:red "> اگر بیش از یک فایل در بالا هست ، از تعمیرکاران مختلفی خریداری شده است و تمامی فایل های ارائه شده سالم هستند</span>
+                            <br /><br>
                             @php
                                 $commentBool = $commentBool = \App\Models\Comment::where('by_id', $deviceByed->id)->get();
                             @endphp
                             @if ($commentBool == '[]')
                                 <form action="{{ route('addComment') }}" class="comment-form" method="POST">
                                     @csrf
-                                    <label for="text">نظر خود رو درباره ی فایل بنویسید و به ازای هر نظر 5 هزار تومان تخفیف
-                                        بگیرید</label><br><br>
+                                    <p style=" white-space: pre;">
+                                                    پس از فلش کردن ، نظر خود را درباره فایل بنویسید و دقیقا مشخص کنید کدام فایل اوکی بوده و نتیجه دستگاه شما چی شده 
+                                                    و به ازای هر نظر 5 هزار تومان ناقابل تخفیف بگیرید . 
+                                                    این نظرات برای همکاران و حتی خود شما در آینده خیلی مفید است .
+                                                    تخفیف بگیرید = 5 هزار تومان به ازای هر نظر
+                                    </p>
                                     <textarea name="text" name="" id="" cols="30" rows="10"></textarea>
                                     <input name="device" type="hidden" value="{{ $device->id }}"><br>
                                     <input name="by" type="hidden" value="{{ $deviceByed->id }}"><br>
@@ -272,7 +276,6 @@
         setInterval(() => {
             var timz = document.getElementsByClassName('end-time');
             for (let j = 0; j < timz.length; j++) {
-                //$(timz).find('#s').text();
                 var s = eval($(timz[j]).find('#s').text());
                 s = s - 1;
                 if (s < 1) {
@@ -284,14 +287,17 @@
                         i = 60
                         $(timz[j]).find('#s').text(s)
                         $(timz[j]).find('#i').text(i)
+
                     }
                     i = i - 1;
                     s = 60
                     $(timz[j]).find('#s').text(s)
                     $(timz[j]).find('#i').text(i)
+
                 }
                 $(timz[j]).find('#s').text(s);
             }
+
         }, 1000);
     </script>
 @endsection

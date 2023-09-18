@@ -7,8 +7,10 @@ $(document).ready(function () {
   $(".mask ,.img-mask").click(function (e) {
     e.preventDefault();
     $(".mask").fadeOut();
+    $(".learn-ios").fadeOut();
     $(".navBtns").animate({ right: "-400" });
     $(".img-mask").attr("src", " ");
+    
   });
 
   $(".navBtns-open").click(function (e) {
@@ -338,7 +340,14 @@ $(document).ready(function () {
     e.preventDefault();
     alertSucsses("در حال توسعه");
   });
-
+  $('.learn-ios-btn').click(function (e) { 
+    $('.mask').fadeIn();
+    $('.learn-ios').fadeIn();
+  });
+  $('.learn-ios-cancel').click(function (e) { 
+      $('.mask').fadeOut();
+      $('.learn-ios').fadeOut();
+  });
   //==================chat================
   function seeAdmin() {
     var chate_id = $(".chat_id").val();
@@ -481,4 +490,25 @@ $(document).ready(function () {
       },
     });
   }, 2000);
+  
+
+  // ============  search  ==============
+  // ============  search  ==============
+    $('.serach-cam').submit(function (e) { 
+      e.preventDefault();
+      text = $('.serach-cam input').val();
+      $(".resetCam-container ul li").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(text) > -1)
+      });
+    });
+    $('.serach-device').submit(function (e) { 
+      e.preventDefault();
+      text = $('.serach-device input').val();
+      $(".resetDevice-container ul li").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(text) > -1)
+      });
+    });
+  // ============  search  ==============
+  // ============  search  ==============
+  
 });

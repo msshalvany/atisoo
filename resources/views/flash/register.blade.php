@@ -3,11 +3,17 @@
     ثبت نام
 @endsection
 @section('css')
-<style>
-    *{
-        color: black
-    }
-</style>
+    <style>
+        * {
+            color: black
+        }
+
+        .forms-start form {
+
+            height: 220px !important;
+
+        }
+    </style>
 @endsection
 @section('content')
     <section class="forms-start">

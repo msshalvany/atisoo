@@ -16,5 +16,8 @@ class messegeChat extends Model
         'image',
         'voice',
         'file',
+        'reply',
+        'hide',
+        'admin_id'
     ];
 }

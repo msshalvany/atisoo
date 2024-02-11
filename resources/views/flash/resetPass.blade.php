@@ -1,9 +1,9 @@
 @extends('flash.layout.layout')
 @section('content')
     <section class="forms-start">
-        <a href="/"><div class="home"><i class="fa fa-home"></i><br>صفحه اصلی </div></a>
+        <a href="/"><div class="home-btn"><i class="fa fa-home"></i><br>صفحه اصلی </div></a>
         <div class="eroore">شما خطا دارید</div>
-        <div class="sucses">بلیت شما رزرو شد</div>
+        <div class="sucses">رمز عوض شد</div>
         <form class="forms-resetPass-1" action="">
             <label for="usrename">شماره همراه خود را وارد کنید:</label>
             <input type="text" id="phon" name="phon"  placeholder="مثال : 09131572450"/>

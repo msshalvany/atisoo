@@ -17,10 +17,13 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('chat_id');
-            $table->text('text')->default('');
+            $table->text('text');
             $table->text('image')->nullable();
             $table->text('voice')->nullable();
             $table->text('file')->nullable();
+            $table->boolean('hide')->default(0);
+            $table->bigInteger('reply')->default(0);
+            $table->bigInteger('admin_id')->default(0);
             $table->timestamps();
         });
     }

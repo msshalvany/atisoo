@@ -1,0 +1,19 @@
+{
+    "data":[
+        {
+            "name1": "CTAPN16-V200-4CH-V1.3 2017-05-17",
+            "name2": "-",
+            "name3": "-",
+            "ic": "TP2818",
+            "ipromPrice": "20",
+            "flashPrice": "50",
+            "ipromName": "-",
+            "flashSize":"16",
+            "password": "12345",
+            "lable": "Xkit-1004PG",
+            "chanel": "4CH",
+            "description": "-",
+            "price": "-"
+        }
+    ]
+}

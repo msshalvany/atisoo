@@ -17,6 +17,10 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('userId');
             $table->bigInteger('deviceId');
+            $table->string('flash')->default('null');
+            $table->string('iprom')->default('null');;
+            $table->bigInteger('updateFile_id')->default(0);
+            $table->bigInteger('package_id')->default(0);
             $table->timestamps();
         });
     }

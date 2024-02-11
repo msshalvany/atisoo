@@ -18,5 +18,7 @@ class user extends Model
         'city',
         'discription',
         'image',
+        'score',
+        'frind'
     ];
 }

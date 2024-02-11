@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('discount')->default(0);
             $table->text('discription');
             $table->text('image');
+            $table->integer('scor')->default(0);
+            $table->integer('frind')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

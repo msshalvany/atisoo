@@ -2,11 +2,20 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    public function render($request, Throwable $exception)
+    {
+        if (!env('APP_DEBUG', true)) {
+            return view('errors.500');
+        } else {
+            return parent::render($request, $exception);
+        }
+    }
     /**
      * A list of exception types with their corresponding custom log levels.
      *

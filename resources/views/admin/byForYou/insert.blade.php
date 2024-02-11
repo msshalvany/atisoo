@@ -8,7 +8,7 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <section class="panel">
                             <header class="panel-heading">
-                                Basic Forms
+                               فایل فلش
                             </header>
                             <div class="panel-body">
                                 <form role="form" action="{{ route('byForYouInsert') }}" method="POST" enctype="multipart/form-data"

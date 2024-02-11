@@ -41,10 +41,16 @@
                         
                         <div class="form-group">
                             <label for="exampleInputPassword1">لوگو</label>
+                            <img src="/{{$info->logo}}" width="300" alt=""><br>
                             <input type="file" name="logo" value="/flash/img/logo.jpg" class="form-control"
                                    id="exampleInputPassword1">
                         </div>
-                        <img src="/{{$info->logo}}" width="300" alt=""><br>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">قوانین سایت</label>
+                            <textarea name="ruls" required class="form-control" name="" id="" cols="30" rows="10">{{$info->ruls}}</textarea>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">متن ای بلدم</label>
+                            <textarea name="ibaladam" required class="form-control" name="" id="" cols="30" rows="4">{{$info->ibaladam}}</textarea>
                         <button style="margin-top: 12px;" type="submit"
                                 name="btn" class="btn btn-info">تغیر
                         </button>

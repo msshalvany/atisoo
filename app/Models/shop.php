@@ -14,5 +14,7 @@ class shop extends Model
         'flash',
         'deviceId',
         'iprom',
+        'updateFile_id',
+        'package_id',
     ];
 }

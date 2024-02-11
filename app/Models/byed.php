@@ -15,6 +15,8 @@ class byed extends Model
         'flash',
         'deviceId',
         'iprom',
+        'updateFile_id',
+        'package_id',
     ];
     protected function serializeDate(DateTimeInterface $date)
     {

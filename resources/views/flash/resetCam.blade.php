@@ -12,7 +12,7 @@
         <h1>ریست رمز دوربین های ip</h1><br>
         <form action="" class="search serach-cam" method="get">
             <input type="text" name="text"
-                placeholder="نام روی برد یا برچسب پشت دستگاه یا دوربین را تایپ کنید ......." />
+                placeholder="دنبال چی می گردی ؟ همین جا سرچ کن......." />
             <button><i style="color: rgb(88, 88, 88)" class="fa fa-search"></i></button>
         </form>
     </section>
@@ -24,12 +24,12 @@
                         <div class="flash-dis-cont-by-for-you">
                             <div> آیدی سایت : <span>{{ $item->id2 }}</span></div>
                             <div><br>
-                                توضیحات :
                                 @php
                                     $audio = json_decode($item->mp3);
                                 @endphp
                                 <br>
                                 @if (count($audio)!=0)
+                                توضیحات :
                                 <audio src="{{ $audio[0] }}" controls></audio>
                                 @endif
                             </div>
@@ -41,12 +41,13 @@
                                 </p>
                             </div><br>
                             <div><br>
-                                نرم افزار ها :
                                 <br>
                                 @php
                                     $apps = json_decode($item->apps);
                                 @endphp
                                 @if (count($apps) != 0)
+                                نرم افزار ها :
+
                                     @foreach ($apps as $key => $value)
                                         <a class="apps-link" href="{{ $value }}">نرم افزار
                                             {{ $key + 1 }}</a><br>
@@ -68,12 +69,13 @@
                                 <div class="prev fa fa-left-long"></div>
                             </div>
                             <div><br>
-                                فیلم آموزشی :
                                 <br>
                                 @php
                                     $vedio = json_decode($item->vedio);
                                 @endphp
                                 @if (count($vedio) != 0)
+                                فیلم آموزشی :
+
                                     <video width="300px" src="{{ $vedio[0] }}" controls></video>
                                 @endif
                             </div>

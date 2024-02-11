@@ -107,6 +107,9 @@ class RsetCamController extends Controller
     public function resetCamUpdateM($id,Request $request)
     {
         $device = rsetCam::find($id);
+        $data = json_decode(file_get_contents("resetCam/" . $device->id2 . "/data.json"), true);
+        $data['data'][0]['description'] = $request->description;
+        File::put("resetCam/" . $device->id2 . "/data.json",json_encode($data));
         $device->update([
             'sort'=>$request->sort,
             'description'=>$request->description,

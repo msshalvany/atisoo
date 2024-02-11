@@ -1,6 +1,6 @@
 @extends('flash.layout.layout')
 @section('title')
-    ثبت نام
+    اطلاعات
 @endsection
 @section('css')
     <style>

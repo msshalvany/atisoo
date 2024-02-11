@@ -18,5 +18,7 @@ class info extends Model
         'resetCamKey', 
         'deviceKey', 
         'logo',
+        'ruls',
+        'ibaladam',
     ];
 }

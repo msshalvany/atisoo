@@ -22,5 +22,6 @@ class byForYou extends Model
         'id2',
         'price',
         'description',
+        'hide',
     ];
 }

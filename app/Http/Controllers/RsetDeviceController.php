@@ -104,10 +104,13 @@ class RsetDeviceController extends Controller
     public function resetDeviceUpdateM($id, Request $request)
     {
         $device = rsetDevice::find($id);
+        $data['data'][0]['description'] = $request->description;
+        File::put("resetDevice/" . $device->id2 . "/data.json",json_encode($data));
         $device->update([
             'sort' => $request->sort,
             'description' => $request->description,
         ]);
+        
         return redirect()->route('resetDevicelist');
     }
     public function resetDevicelistAddV(){

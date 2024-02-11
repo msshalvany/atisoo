@@ -1,12 +1,5 @@
 @extends('admin.layout.layout')
 @section('content')
-    <div class="conf-cont">
-        <p>ایا از انجام این عملیات مطمعن هستید</p>
-        <div>
-            <button class="cancel">کنسل</button>
-            <button class="submit">مطمعن</button>
-        </div>
-    </div>
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
@@ -14,7 +7,7 @@
                     لیست فایل ها
                 </header>
                 <form class="container row" action="{{ route('flashSearch') }}">
-                    <input style="width: 240px;display: inline" class="form-control" name="text" type="text">
+                    <input required style="width: 240px;display: inline" class="form-control" name="text" type="text">
                     <input type="submit" value="جستوجو" class="btn btn-primary">
                 </form><br>
                 @if ($device->hasPages())
@@ -66,9 +59,10 @@
                     <thead>
                         <tr>
                             <td>id</td>
-                            <td>نام</td>
                             <td>نمایش</td>
-                            <td>حذف</td>
+                            @if (session()->get('level') <= 1)
+                                <td>حذف</td>
+                            @endif
                             <td>آپدیت</td>
                             <td>آپدیت دستی</td>
                         </tr>
@@ -78,22 +72,23 @@
                         @foreach ($device as $item)
                             <tr>
                                 <td>{{ $item->id2 }}</td>
-                                <td>{{ $item->name1 }}</td>
                                 <form class="" action="{{ route('flashShow', ['id' => $item->id]) }}" method="GET">
                                     @csrf
-                                    @method('delete')
+                                    @method('delete')   
                                     <td>
                                         <button class="btn btn-success btn-xs"><i class="icon-picture"></i></button>
                                     </td>
                                 </form>
-                                <form class="conf-form" action="{{ route('flashDelete', ['id' => $item->id]) }}"
-                                    method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <td>
-                                        <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
-                                    </td>
-                                </form>
+                                @if (session()->get('level') <= 1)
+                                    <form class="conf-form" action="{{ route('flashDelete', ['id' => $item->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <td>
+                                            <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
+                                        </td>
+                                    </form>
+                                @endif
                                 <form action="{{ route('flashUpdate', ['id' => $item->id]) }}" method="POST">
                                     @csrf
                                     <td>

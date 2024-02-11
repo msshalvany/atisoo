@@ -24,6 +24,8 @@ return new class extends Migration
             $table->text('resetCamKey'); 
             $table->text('deviceKey'); 
             $table->text('logo');
+            $table->text('ruls');
+            $table->text('ibaladam');
             $table->timestamps();
         });
     }

@@ -1,13 +1,15 @@
 @extends('flash.layout.layout')
-@section('keys'){{$info->searchFlashKey}}@endsection
+@section('keys')
+    {{ $info->searchFlashKey }}
+@endsection
 @section('title')
-     جستجوی فایل فلش
+    جستجوی فایل فلش
 @endsection
 @section('css')
     <style>
         .section1 {
             margin-top: 120px
-        }   
+        }
     </style>
 @endsection
 @section('content')
@@ -29,15 +31,16 @@
                 <p>تعداد فایل های آپلود شده</p>
             </div>
         </div>
-        <p style="text-align: center;padding: 0 12px"> در صورتی که فایلی را پیدا نکردید در <span style="color: red"> چت با مدیریت </span>  پیام دهید  </p><br>
+        <p style="text-align: center;padding: 0 12px"> در صورتی که فایلی را پیدا نکردید در <span style="color: red"> چت با
+                مدیریت </span> پیام دهید </p><br>
         <form action="{{ route('search') }}" class="search" method="get">
             <input type="text" name="text"
-                placeholder="دنبال چی می گردی ؟ همین جا سرچ کن......." />
+                placeholder="قسمتی از نام روی برد یا برچسب پشت دستگاه یا دوربین را تایپ کنید..." />
             <button><i style="color: rgb(88, 88, 88)" class="fa fa-search"></i></button>
         </form>
     </section>
     <section class="section2">
-        
+
         @if ($device != 'null')
             @if ($device->hasPages())
                 <ul class="pagination" style="display: flex">

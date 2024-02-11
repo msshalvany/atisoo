@@ -27,8 +27,59 @@
             position: fixed;
             bottom: 18px;
             right: 8px;
+            width: 100px;
+        }
+
+        .kasb {
+            position: fixed;
+            bottom: 180px;
+            right: 8px;
+            width: 100px;
+        }
+
+        .enamad img,
+        .kasb img {
+            width: 100px;
+        }
+
+        .home-btn {
+            display: none
         }
     </style>
+    @if (!session()->exists('user'))
+        <style>
+            .navBtns {
+                display: block;
+                width: 100%;
+                justify-content: unset;
+                background-color: unset;
+                height: unset;
+                position: unset;
+                top: unset;
+                right: unset;
+                flex-direction: unset;
+                z-index: unset;
+            }
+        </style>
+    @else
+        <style>
+            .navBtns-open {
+                display: none;
+            }
+
+            .navBtns {
+                display: block;
+                justify-content: unset;
+                background-color: unset;
+                height: unset;
+                position: unset;
+                top: unset;
+                right: unset;
+                flex-direction: unset;
+                z-index: unset;
+            }
+        </style>
+    @endif
 @endsection
 @section('content')
     <div class="learn-ios">
@@ -47,6 +98,11 @@
                 src="https://Trustseal.eNamad.ir/logo.aspx?id=345037&amp;Code=pEkNCaiy1BJE34X2k4QV" alt=""
                 style="cursor:pointer" id="pEkNCaiy1BJE34X2k4QV"></a>
     </div>
+    <div class="kasb">
+        <img referrerpolicy='origin' id = 'rgvjfukzesgtfukzrgvjrgvj' style = 'cursor:pointer'
+            onclick = 'window.open("https://logo.samandehi.ir/Verify.aspx?id=360633&p=xlaogvkaobpdgvkaxlaoxlao", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")'
+            alt = 'logo-samandehi' src = 'https://logo.samandehi.ir/logo.aspx?id=360633&p=qftiwlbqlymawlbqqftiqfti' />
+    </div>
     <section class="section1">
         <img src="{{ $info->logo }}" class="logo-img" alt="موردی یافت نشد"><br>
         <h1>خدمات آنلاین دوربین مداربسته و dvr , nvr</h1><br>
@@ -60,7 +116,8 @@
                 <p style="font-size: 18px">دانلود اپلیکیشن : خدمات آنلاین مداربسته . آتی سو</p>
                 <div class="apps-links-item">
                     {{-- <div><img width="150px" src="flash/img/logo-app.png" alt=""></div> --}}
-                    <a href="/ruls"><img width="160px"src="flash/img/google-play-download.png" alt=""></a>
+                    <a href="https://play.google.com/store/apps/details?id=co.median.android.lyrpxz"><img
+                            width="160px"src="flash/img/google-play-download.png" alt=""></a>
                     <a href="https://cafebazaar.ir/app/io.gonative.android.jykprp">
                         <div><img width="150px" src="flash/img/bazar.png" alt=""></div>
                     </a>
@@ -81,18 +138,18 @@
             <a href="/resetDe">
                 <p>ریست پسورد DVR , NVR</p><span style="color: red;text-shadow: none">(برای عموم مردم)</span>
             </a>
-            <a class="developer">
+            <a href="/packegeL">
                 <p>پکیج های آموزشی</p><span style="color: red;text-shadow: none">(برای عموم مردم)</span>
             </a>
             <a href="/resetCa">
                 <p>ریست پسورد دوربین ip</p><span style="color: red;text-shadow: none;font-size: 12px">(برای نصاب ها و
                     تعمیرکاران)</span>
             </a>
-            <a class="updateBtn developer">
+            <a class="updateBtn" href="/searchUpdateViwe">
                 <p>جستجوی فایل آپدیت</p><span style="color: red;text-shadow: none;font-size: 12px">(برای نصاب ها و
                     تعمیرکاران)</span>
             </a>
-            <a class="updateBtn developer">
+            <a class="updateBtn" href="/katalogL">
                 <p style="font-size: 20px">دانلود کاتالوگ ها و دفترچه ها</p><span
                     style="color: red;text-shadow: none;font-size: 12px">(برای نصاب ها و
                     تعمیرکاران)</span>
@@ -104,10 +161,10 @@
             <a href="/byForYou">
                 <P>خرید فایل فلش از تعمیرکاران</P>
             </a>
-            <a class="updateBtnBy developer">
+            <a class="updateBtnBy" href="{{ route('byForYouUpdateFile') }}">
                 <p>خرید فایل آپدیت از تعمیرکاران</p>
             </a>
-            <a class="updateBtn developer">
+            <a href="{{ route('cooperateL') }}" class="updateBtn">
                 <p>همکاری با ما و کسب درآمد</p>
             </a>
             <a href="/abute">
@@ -115,40 +172,12 @@
             </a>
         </div>
     </section>
-
-    {{-- <session class="session-disc-audio">
-        <ul>
-            <li>
-                <audio src="/flash/audio/3.ogg" controls></audio>
-                <p>
-                    راهنمای خرید
-                    <br>
-                    تلگرام و ایتا : 09217902890
-                </p>
-            </li>
-            <li>
-                <audio src="/flash/audio/2.ogg" controls></audio>
-                <p>تفاوت فایل فلش و فایل آپدیت</p>
-            </li>
-            <li>
-                <audio src="/flash/audio/1.ogg" controls></audio>
-                <p>
-                    پذیرش تعمیرات از سراسر کشور <br>
-                    تلگرام و ایتا : 09217902890
-                </p>
-            </li>
-        </ul>
-    </session> --}}
-    <a href="https://ibaladam.ir/">
-        <div class="others">
-            اتاق گفتگو بساز و هر سوالی در مورد دوربین های مداربسته داری بپرس و یا تبلیغ کن (کاملا رایگان)
-            {{-- <span style="color: red">تبلیغ رایگان</span> --}}
-        </div>
-    </a>
+    <div class="others">
+        {{$info->ibaladam}}
+    </div>
 @endsection
 @section('scripts')
     <script !src="">
-       
         // $('.updateBtn').click(function(e) {
         //     e.preventDefault();
         //     alertSucsses('در حال توسعه به زودی فعال میشود')
@@ -164,12 +193,4 @@
             document.cookie = "atisoo_password = {{ session()->get('atisoo_password') }}";
         </script>
     @endif
-
-    {{-- <script>
-        atisoo_phon = getCookie("atisoo_phon")
-        atisoo_password = getCookie("atisoo_password")
-        $(window).on("load", function() {
-            
-        });
-    </script> --}}
 @endsection

@@ -1,7 +1,15 @@
 $(document).ready(function () {
+  var ajaxHandel;
+  $(".stop-ajsx").click(function () {
+    // توقف درخواست‌های AJAX
+    if (ajaxHandel && ajaxHandel.readyState !== 4) {
+      ajaxHandel.abort();
+      $(".loead-wait-cin").fadeOut();
+    }
+  });
   $.ajaxSetup({
     headers: {
-      "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr("content"),
+      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
     },
   });
   $(".mask ,.img-mask").click(function (e) {
@@ -10,7 +18,6 @@ $(document).ready(function () {
     $(".learn-ios").fadeOut();
     $(".navBtns").animate({ right: "-400" });
     $(".img-mask").attr("src", " ");
-    
   });
 
   $(".navBtns-open").click(function (e) {
@@ -75,7 +82,9 @@ $(document).ready(function () {
     $.ajax({
       type: "post",
       url: "/user/setUserPass",
-      data: $("#password"),
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
       success: function (responce) {
         if (responce == 1) {
           $("#send").attr("disabled", "disabled");
@@ -85,6 +94,8 @@ $(document).ready(function () {
           }, 2000);
         } else if (responce == 0) {
           alertEore("رمز مناسب نیست حد اقل 4 رقم");
+        } else if (responce == 2) {
+          alertEore("این شماره موجود نیست");
         }
       },
     });
@@ -336,31 +347,29 @@ $(document).ready(function () {
       $(".by-end").prop("disabled", false);
     }
   });
-  $(".search-upadte-btn").click(function (e) {
-    e.preventDefault();
-    alertSucsses("در حال توسعه");
+  $(".learn-ios-btn").click(function (e) {
+    $(".mask").fadeIn();
+    $(".learn-ios").fadeIn();
   });
-  $('.learn-ios-btn').click(function (e) { 
-    $('.mask').fadeIn();
-    $('.learn-ios').fadeIn();
-  });
-  $('.learn-ios-cancel').click(function (e) { 
-      $('.mask').fadeOut();
-      $('.learn-ios').fadeOut();
+  $(".learn-ios-cancel").click(function (e) {
+    $(".mask").fadeOut();
+    $(".learn-ios").fadeOut();
   });
   //==================chat================
-  function seeAdmin() {
+  function seeUser() {
     var chate_id = $(".chat_id").val();
     var last_Messege = $(".texts-container")
-      .find(".user-text-con")
+      .find(".maneger-text-con")
       .eq(0)
       .attr("id");
     $.ajax({
       type: "get",
-      url: `/lastSeenAdmin/${last_Messege}/${chate_id}`,
+      url: `/lastSeenUser/${last_Messege}/${chate_id}`,
       processData: false,
       contentType: false,
-      success: function (response) {},
+      success: function (response) {
+        console.log("see user");
+      },
     });
   }
   $(".image-loder").click(function (e) {
@@ -376,26 +385,87 @@ $(document).ready(function () {
       .prepend(`<img width="100%" src='${src}'>`);
     $(e.target).parents().find(".image-loder").remove();
   });
+
+  $(".chat-form-container textarea").keydown(function (e) {
+    if (e.key === "Enter" && e.ctrlKey) {
+      e.preventDefault(); // جلوگیری از رفتار پیش‌فرض کلید Enter
+      $(this).val($(this).val() + "\n"); // اضافه کردن خط جدید
+    }
+  });
+  $(".chat-form-container textarea").keydown(function (e) {
+    if (e.key === "Enter" && !e.ctrlKey) {
+      e.preventDefault();
+      $(".chat-inputs").submit();
+    }
+  });
+
   $(".chat-inputs").submit(function (e) {
+    var form = new FormData(this);
     e.preventDefault();
-    $.ajax({
+    var reply = "";
+    if ($(".input-reply").val() != 0) {
+      reply = `<div class="reply-text-cont">
+      <i class="fa fa-reply"></i>
+          <span>${$(".text-replyed").text()}</span>
+      </div>`;
+    }
+    ajaxHandel = $.ajax({
       url: $(this).attr("action"),
       type: $(this).attr("method"),
+      xhr: function () {
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener(
+          "progress",
+          function (evt) {
+            if (form.get("file").name != "") {
+              if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total;
+                percentComplete = parseInt(percentComplete * 100);
+                console.log(percentComplete);
+                $(".loead-wait-cin").css("display", "flex");
+                $(".loead-wait-cin").find(".pers").text(`${percentComplete} %`);
+                console.log(percentComplete);
+                if (percentComplete == 100) {
+                  setTimeout(() => {
+                    $(".loead-wait-cin").fadeOut();
+                    console.log("end");
+                  }, 1000);
+                }
+              }
+            }
+          },
+          false
+        );
+        return xhr;
+      },
       dataType: "JSON",
-      data: new FormData(this),
+      data: form,
       processData: false,
       contentType: false,
       success: function (data) {
+        console.log(data);
         if (data == 0) {
           alertEore("این فرمت پشتیبانی نمی شود");
+        } else if (data == 3) {
+          alertEore("شما فقط میتونید هزار کاراکتر ارسال کنید");
+        } else if (data == 4) {
+          alertEore("حجم فایل حد اکثر 200 مگابایت باید باشد");
         } else if (data.type == "pic") {
           $(".texts-container").prepend(`
                   <div class="user-text-con" id=${data.masssege.id}>
                   <img src="${data.user.image} "alt="">
                     <div class="user-text">
+                      ${reply ? reply : ""}
                       <img style="width: 100%" src="${data.path}" controls />
-                      ${data.text ? data.text : ""}
-                      <span class="messege-time">${data.masssege.updated_at}</span>
+                      <p>${data.text ? data.text : ""}</p>
+                      <span class="messege-time"></span>
+                      <div class="messege-items-bl">
+                          <i class="fa fa-trash" onclick="messDel(event)" aria-hidden="true"></i>    
+                          <i class="fa fa-reply" onclick='changReply(event)' aria-hidden="true"></i>
+                          <span class="messege-time">${formatDateTime(
+                            data.masssege.updated_at
+                          )}</span>
+                      </div>                                        
                     </div>
                   </div>  
                   `);
@@ -404,11 +474,18 @@ $(document).ready(function () {
                   <div class="user-text-con" id=${data.masssege.id}> 
                   <img src="${data.user.image} "alt="">
                     <div class="user-text">
+                      ${reply ? reply : ""}
                       <a class="downloade-file-chat" href="${
                         data.path
                       }" controls ><i class="fa fa-file"></i></a><br><br>
-                      ${data.text ? data.text : ""}
-                      <span class="messege-time">${data.masssege.updated_at}</span>
+                      <p>${data.text ? data.text : ""}</p>
+                      <div class="messege-items-bl">
+                        <i class="fa fa-trash" onclick="messDel(event)" aria-hidden="true"></i>
+                        <i class="fa fa-reply" onclick='changReply(event)'  aria-hidden="true"></i>
+                        <span class="messege-time">${formatDateTime(
+                          data.masssege.updated_at
+                        )}</span>
+                    </div> 
                     </div>
                   </div>  
                   `);
@@ -417,98 +494,58 @@ $(document).ready(function () {
                   <div class="user-text-con" id=${data.masssege.id}> 
                   <img src="${data.user.image} "alt="">
                     <div class="user-text">
-                    ${data.text ? data.text : ""}
-                    <span class="messege-time">${data.masssege.updated_at}</span>
+                       ${reply ? reply : ""}
+                      <p>${data.text ? data.text : ""}</p>
+                      <div class="messege-items-bl">
+                          <i class="fa fa-trash" onclick="messDel(event)" aria-hidden="true"></i>
+                          <i class="fa fa-reply" onclick='changReply(event)'  aria-hidden="true"></i>
+                          <span class="messege-time">${formatDateTime(
+                            data.masssege.updated_at
+                          )}</span>
+                      </div> 
                     </div>
                   </div>  
                   `);
         }
         $(".chat-inputs").trigger("reset");
-        seeAdmin()
+        $(".fa-reply").css("color", "black");
+        $(".input-reply").val(0);
+        $(".text-replyed").empty();
+        seeUser();
       },
     });
   });
-
-  setInterval(() => {
-    var lastMessege = $(".texts-container").children().eq(0).attr("id");
-    $.ajax({
-      url: `/checkSendChat`,
-      type: "POST",
-      dataType: "JSON",
-      data: { id: lastMessege, user: $(".user").attr("id") },
-      success: function (data) {
-        if (data != 0) {
-          if (data.image != null) {
-            $(".texts-container").prepend(`
-                  <div class="maneger-text-con" id="${data.id}">
-                  <img src="flash/img/maneger.png"alt="">
-                    <div class="maneger-text">
-                      <img style="width: 100%" src="${data.image}" controls />
-                      ${data.text ? data.text : ""}
-                      <span class="messege-time">${data.updated_at}</span>
-                    </div>
-                  </div>  
-                  `);
-          } else if (data.file != null) {
-            $(".texts-container").prepend(`
-                  <div class="maneger-text-con" id="${data.id}"> 
-                  <img src="flash/img/maneger.png"alt="">
-                    <div class="maneger-text">
-                      <a class="downloade-file-chat" href="${
-                        data.file
-                      }" controls ><i class="fa fa-file"></i></a><br><br>
-                      ${data.text ? data.text : ""}
-                      <span class="messege-time">${data.updated_at}</span>
-                    </div>
-                  </div>  
-               `);
-          } else if (data.voice != null) {
-            $(".texts-container").prepend(`
-                  <div class="maneger-text-con" id="${data.id}"> 
-                  <img src="flash/img/maneger.png"alt="">
-                    <div class="maneger-text">
-                    <audio style="width: 100%" src="${
-                      data.voice
-                    }" controls></audio>dvd
-                      ${data.text ? data.text : ""}
-                      <span class="messege-time">${data.updated_at}</span>
-                    </div>
-                  </div>  
-               `);
-          } else {
-            $(".texts-container").prepend(`
-                  <div class="maneger-text-con" id="${data.id}"> 
-                  <img src="flash/img/maneger.png"alt="">
-                    <div class="maneger-text">
-                    ${data.text}
-                    <span class="messege-time">${data.updated_at}</span>
-                    </div>
-                  </div>  
-                  `);
-          }
-        }
-      },
+  $(".file-uplode").change(function (e) {
+    $(".caption-file-con").animate({
+      top: "50%",
     });
-  }, 2000);
-  
-
-  // ============  search  ==============
-  // ============  search  ==============
-    $('.serach-cam').submit(function (e) { 
-      e.preventDefault();
-      text = $('.serach-cam input').val();
-      $(".resetCam-container ul li").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(text) > -1)
-      });
+  });
+  $(".caption-file-con button").click(function (e) {
+    e.preventDefault();
+    $(".caption-file-con").animate({
+      top: "-12%",
     });
-    $('.serach-device').submit(function (e) { 
-      e.preventDefault();
-      text = $('.serach-device input').val();
-      $(".resetDevice-container ul li").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(text) > -1)
-      });
+    var text = $(".caption-file").val();
+    $(".chat-form-container textarea").val(text);
+    $(".chat-inputs").submit();
+    $(".chat-form-container textarea").val("");
+  });
+  // ============  search  ==============
+  // ============  search  ==============
+  $(".serach-cam").submit(function (e) {
+    e.preventDefault();
+    text = $(".serach-cam input").val();
+    $(".resetCam-container ul li").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(text) > -1);
     });
+  });
+  $(".serach-device").submit(function (e) {
+    e.preventDefault();
+    text = $(".serach-device input").val();
+    $(".resetDevice-container ul li").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(text) > -1);
+    });
+  });
   // ============  search  ==============
   // ============  search  ==============
-  
 });

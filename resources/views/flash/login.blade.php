@@ -1,16 +1,11 @@
 @extends('flash.layout.layout')
 @section('css')
     <style>
-        * {
-            color: black
-        }
     </style>
 @endsection
 @section('content')
     <section class="forms-start">
-        <a href="/">
-            <div class="home"><i style="color: white" class="fa fa-home"></i><br>صفحه اصلی </div>
-        </a>
+        
         <form class="regester" action="{{ route('login') }}" method="post">
             @csrf
             <label for="phon">شماره همراه خود را وارد کنید :</label>

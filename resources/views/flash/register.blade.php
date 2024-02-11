@@ -4,9 +4,7 @@
 @endsection
 @section('css')
     <style>
-        * {
-            color: black
-        }
+        
 
         .forms-start form {
 
@@ -17,9 +15,7 @@
 @endsection
 @section('content')
     <section class="forms-start">
-        <a href="/">
-            <div class="home"><i style="color: white" class="fa fa-home"></i><br>صفحه اصلی </div>
-        </a>
+        
         <div class="eroore">شما خطا دارید</div>
         <div class="sucses">بلیت شما رزرو شد</div>
         <form class="form-1" action="">
@@ -35,7 +31,9 @@
         <form class="form-3" action="">
             <label for="time"> یک رمز عبور برای خود انتخاب کنید :</label>
             <input type="text" id="password" name="password" />
-            <input id="send" type="submit" value="ارسال" />
+            <label for="time" class="text-danger mt-2"> اگر معرف دارید شماره او را وارد کنید (دلخواه):</label>
+            <input type="text" id="invidPhon" name="invidPhon" />
+            <input class="mt-1" id="send" type="submit" value="ارسال" />
         </form>
     </section>
 @endsection

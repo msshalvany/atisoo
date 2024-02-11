@@ -59,6 +59,7 @@
                          <tr>
                              <td>نام</td>
                              <td>id</td>
+                             <td>شغل</td>
                              <td>شماره</td>
                              <td>نام مغازه</td>
                              <td>شهر</td>
@@ -69,6 +70,7 @@
                              <tr>
                                  <td>{{ $user->name }}</td>
                                  <td>{{ $user->id }}</td>
+                                 <td>{{ $user->frind }}</td>
                                  <td>{{ $user->phon }}</td>
                                  <td>{{ $user->stor }}</td>
                                  <td>{{ $user->city }}</td>

@@ -22,6 +22,37 @@ body {
     background: #ffffff;
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
 }
+.blue-btn{
+    background-color: rgb(0, 89, 255);
+    border: 2px solid rgb(0, 89, 255);
+    color: white;
+    padding: 8px 6px;
+    border-radius: 6px;
+    transition: all 0.5s;
+    border: unset;
+}
+.red-btn{
+    background-color: rgb(245, 69, 69);
+    background-color: rgb(245, 69, 69);
+    color: white;
+    padding: 8px 6px;
+    border-radius: 6px;
+    transition: all 0.5s;
+    border: unset;
+}
+
+.base-red-btn{
+      padding: 8px 12px;
+    background-color: rgb(245, 69, 69);
+    color: white;
+    border-radius: 12px;
+    border: none;
+    transition: all 0.4s;
+    cursor: pointer;
+    margin-top: 18px;
+    font-weight: bold;
+    width: fit-content;
+}
 
 .circles {
     position: fixed;
@@ -149,6 +180,9 @@ a {
     color: unset;
 }
 
+p{
+    margin-bottom: unset !important;
+}
 a:hover {
     text-decoration: none;
     cursor: pointer;
@@ -269,6 +303,25 @@ a:hover {
     display: none;
     z-index: 4;
 }
+.loead-wait-cin {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: rgb(69 69 69 / 70%);
+    z-index: 5;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loead-wait-cin span {
+    opacity: 1;
+    font-size: 40px;
+    font-weight: bold;
+}
 
 .img-mask {
     width: 80%;
@@ -283,7 +336,7 @@ a:hover {
     background-color: rgb(32, 65, 252);
     padding: 26px 13px;
     position: fixed;
-    bottom: 25px;
+    bottom: 30px;
     left: 30px;
     color: white;
     border-radius: 50% 50% 20px 20px;
@@ -291,19 +344,20 @@ a:hover {
     font-weight: bold;
     font-size: 12px;
     cursor: pointer;
+    z-index: 12;
     animation: 1.8s chat-icon infinite;
 }
 @keyframes chat-icon {
     0% {
-        bottom: 20px;
+        bottom: 30px;
         border-radius: 50% 50% 30px 30px;
     }
     60% {
-        bottom: 100px;
+        bottom: 120px;
         border-radius: 50%;
     }
     100% {
-        bottom: 20px;
+        bottom: 30px;
         border-radius: 50% 50% 30px 30px;
     }
 }
@@ -330,6 +384,12 @@ nav {
     background-color: white;
 }
 
+.left-items-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
 .fa-bars {
     font-weight: bold;
     font-size: 34px;
@@ -538,11 +598,29 @@ nav {
     font-weight: bold;
     margin-right: 12px;
 }
-
-.fa-shopping-cart {
+/* .fa-shopping-cart {
+    vertical-align: -20px;
+} */
+.fa-shopping-cart ,.fa-dashboard {
     font-size: 32px;
     position: relative;
     cursor: pointer;
+    vertical-align: -12px;
+}
+.panel-icon{
+    display: flex;
+    text-align: center;
+    margin: 2px 0 0 20px;
+    color: white;
+    background-color: #09f;
+    padding: 5px 15px;
+    border-radius: 12px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.panel-icon p{
+    margin: 0 5px 0 0 ;
 }
 
 .cart-count {
@@ -784,7 +862,7 @@ nav {
     margin: 120px auto;
 }
 
-.show-device {
+.show-device , .add-packege-btn {
     padding: 8px 12px;
     background-color: rgb(245, 69, 69);
     color: white;
@@ -1201,7 +1279,7 @@ select {
     position: fixed;
     height: 35px;
     border-radius: 40px 40px 0 0;
-    background-color: #09f;
+    background-image: linear-gradient(-45deg, blue 30%, #0199d0, blue 50%);
     text-align: center;
     bottom: 0;
     color: white;
@@ -1210,6 +1288,19 @@ select {
     font-size: 14px;
     font-style: italic;
     cursor: pointer;
+    animation: ibaladam 2s infinite;
+    background-size: 400% 400%;
+}
+@keyframes ibaladam {
+     0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 .session-disc-audio ul {
     display: flex;
@@ -1248,20 +1339,22 @@ select {
     padding: 24px 16px;
     margin-top: 12px;
 }
-.home {
-    position: fixed;
-    top: 5px;
-    left: 75px;
-    text-align: center;
-    font-weight: bold;
-    color: white;
+
+.home-btn div{
     background-color: #ff4141;
-    padding: 5px 15px;
+    display: flex;
+    text-align: center;
+    margin: 2px 0 0 10px;
+    color: white !important;
+    padding: 7px 15px;
     border-radius: 12px;
-    z-index: 12;
+    align-items: center;
     font-size: 12px;
 }
-
+.home-btn div i {
+    font-size: 28px;
+    margin:  0 0 0 4px;
+}
 .pagination {
     display: inline-block;
     padding-right: 0;
@@ -1437,7 +1530,7 @@ label.label input[type="file"] {
     display: flex;
     flex-direction: column-reverse;
     position: fixed;
-    top: 50px;
+    top: 105px;
     width: 90%;
     left: 50%;
     transform: translate(-50%, 0);
@@ -1525,15 +1618,187 @@ label.label input[type="file"] {
     font-size: 21px;
 }
 
-.messege-time {
+
+
+
+
+
+.messege-items-bl{
     position: absolute;
     font-size: 8px;
     bottom: 4px;
     left: 20px;
+    width: 100%;
+    display: flex;
+    justify-content:flex-end;
+}
+.messege-items-bl .fa-trash{
+    order: -1;
+    margin-right: 56px;
+    flex-grow: 2;
+}
+.messege-items-bl i{
+    font-size: 12px;
+    margin-left: 5px
 }
 
+.text-replyed{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px 0 5px;
+    top: -32px;
+    right: 60px;
+    position: absolute;
+    font-size: 14px;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+    opacity: 0.8;
+    box-shadow:  0 0 5px black;
+    border-radius: 12px;
+}
+.reply-text-cont{
+    border-bottom: white 2px solid;
+    opacity: 0.6;
+    font-size: 14px;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nav-chat{
+    margin-top: 60px;
+    display: flex;
+    width: 100%;
+}
+.search-in-chat-con{
+    display: flex;
+    z-index: 2;
+}
+.time-to-online-con{
+    display: flex;
+    z-index: 2;
+    background-color: rgb(249, 173, 81);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 12px;
+}
+.search-in-chat-con input{
+    border: 2px solid rgb(190, 190, 190);
+    border-radius: 12px;
+    padding: 0 4px;
+}
+@media screen and (max-width: 500px) {
+    .nav-chat{
+        flex-wrap: wrap ;
+    }
+    .texts-container{
+        margin-top: 40px;
+        height: 64vh;
+    }
+    .time-to-online-con{
+        margin-top: 5px;
+    }
+}
 /* =============  chat  ============== */
 /* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+/* =============  chat  ============== */
+
+
+
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+.edit-user-con{
+    padding: 15px 20px;
+    min-width: 320px;
+    max-width: 600px;
+    background-color: white;
+    border: 2px solid rgb(0, 89, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 32px;
+    margin: 80px auto;
+}
+.edit-user-con > div{
+    display: flex;
+    justify-content: center;
+}
+.edit-user-con div img{
+    margin-bottom: 12px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.edit-user-con form{
+    display: block  ;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.edit-user-con form div{
+    width: 100%;
+    text-align: center;
+    margin: 12px 0 0 0;
+}
+.edit-user-con form input[type="text"],select {
+    width: 100%;
+    border: 2px solid rgb(190, 190, 190);
+    border-radius: 12px;
+    padding: 0 4px;
+}
+.edit-user-con form  input[type="submit"] {
+    width: 100%;
+    border: unset;
+    background-color: rgb(0, 89, 255);
+    border: 2px solid rgb(0, 89, 255);
+    color: white;
+    padding: 8px 6px;
+    border-radius: 12px;
+    transition: all 0.5s;
+}
+.edit-user-con form input[type="submit"]:hover {
+    color: rgb(0, 89, 255);
+    background-color: unset;
+}
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
+/* ===================== panel ==================== */
 
 @media screen and (max-width: 500px) {
     .search {
@@ -1571,7 +1836,7 @@ label.label input[type="file"] {
     .flash-cont,
     .flash-cont-by-for-you {
         flex-direction: column-reverse;
-        width: 90%;
+        width: 98%;
         margin: 0 auto;
     }
     div#tabs-nav {

@@ -27,7 +27,9 @@ class InfoController extends Controller
             'resetDeviceKey' => $request->resetDeviceKey,
             'resetCamKey' => $request->resetCamKey,
             'deviceKey' => $request->deviceKey,
-            'logo' => $pathPic
+            'logo' => $pathPic,
+            'ruls' =>  $request->ruls,
+            'ibaladam' =>  $request->ibaladam,
         ]);
         return redirect()->back();
     }

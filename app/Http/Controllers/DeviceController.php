@@ -21,7 +21,7 @@ class DeviceController extends Controller
 
     public function flashLodear(Request $request)
     {
-        for ($i = 1; $i < 100; $i++) {
+        for ($i = 1; $i < 10000; $i++) {
             if (File::exists('file/' . $i)) {
                 $maxDevice = device::max('id2');
                 if ($maxDevice == '') {
@@ -41,7 +41,7 @@ class DeviceController extends Controller
                 foreach (glob("file/" . $folderName . "/flash/*") as $target) {
                     $des = $this->getBet($target, '.');
                     $counter++;
-                    $new_path = 'file/' . $folderName . '/flash/' . 'flash_' . $counter . '_' . $des . '_' . $maxDevice . '_' . Str::random(24) . '.bin';
+                    $new_path = 'file/' . $folderName . '/flash/' . 'flash_' . $counter . '_' . $des . '_' . $maxDevice . '.bin';
                     File::move($target, $new_path);
                     array_push($flash, $new_path);
                 }
@@ -49,7 +49,7 @@ class DeviceController extends Controller
                 foreach (glob("file/" . $folderName . "/iprom/*") as $target) {
                     $des = $this->getBet($target, '.');
                     $counter++;
-                    $new_path = 'file/' . $folderName . '/iprom/' . 'eeprom_' . $counter . '_' . $des . '_' . $maxDevice . '_' . Str::random(24) . '.bin';
+                    $new_path = 'file/' . $folderName . '/iprom/' . 'eeprom_' . $counter . '_' . $des . '_' . $maxDevice . '.bin';
                     File::move($target, $new_path);
                     array_push($iprom, $new_path);
                 }

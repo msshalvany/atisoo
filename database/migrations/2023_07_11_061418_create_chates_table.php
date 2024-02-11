@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('chates', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->strbigIntegering('see_user')->default(0);
+            $table->bigInteger('see_user')->default(0);
             $table->bigInteger('see_admin')->default(0);
             $table->bigInteger('order')->default(0);
             $table->timestamps();

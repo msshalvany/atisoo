@@ -50,9 +50,6 @@
     </style>
 @endsection
 @section('content')
-    <a href="/">
-        <div class="home"><i class="fa fa-home"></i><br>صفحه اصلی </div>
-    </a>
     <div class="flash-cont flash-cont-show">
         <div class="flash-by-cont flash-by-cont-show">
             <ul id="{{ $device->id }}">

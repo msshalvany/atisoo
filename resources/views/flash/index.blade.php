@@ -6,13 +6,12 @@
     خدمات آنلاین مدار بسته
 @endsection
 @section('css')
-    <style>
         .byForYou {
-            display: none
+            display: none;
         }
 
         .abute {
-            display: none
+            display: none;
         }
 
         .dropdao-btn-container {
@@ -45,9 +44,7 @@
         .home-btn {
             display: none
         }
-    </style>
     @if (!session()->exists('user'))
-        <style>
             .navBtns {
                 display: block;
                 width: 100%;
@@ -60,25 +57,21 @@
                 flex-direction: unset;
                 z-index: unset;
             }
-        </style>
     @else
-        <style>
-            .navBtns-open {
-                display: none;
-            }
-
-            .navBtns {
-                display: block;
-                justify-content: unset;
-                background-color: unset;
-                height: unset;
-                position: unset;
-                top: unset;
-                right: unset;
-                flex-direction: unset;
-                z-index: unset;
-            }
-        </style>
+        .navBtns-open {
+        display: none;
+        }
+        .navBtns {
+        display: block;
+        justify-content: unset;
+        background-color: unset;
+        height: unset;
+        position: unset;
+        top: unset;
+        right: unset;
+        flex-direction: unset;
+        z-index: unset;
+        }
     @endif
 @endsection
 @section('content')

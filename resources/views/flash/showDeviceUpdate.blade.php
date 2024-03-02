@@ -25,7 +25,7 @@
     {{ $text }}
 @endsection
 @section('css')
-    <style>
+
         .home {
             position: fixed;
             top: 5px;
@@ -50,7 +50,6 @@
         .flash-cont-by-for-you {
             margin-top: 200px;
         }
-    </style>
 @endsection
 @section('content')
     <div class="flash-cont flash-cont-show">

@@ -1,11 +1,9 @@
 @extends('flash.layout.layout')
 @section('css')
-    <style>
-    </style>
 @endsection
 @section('content')
     <section class="forms-start">
-        
+
         <form class="regester" action="{{ route('login') }}" method="post">
             @csrf
             <label for="phon">شماره همراه خود را وارد کنید :</label>

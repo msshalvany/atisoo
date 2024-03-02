@@ -6,7 +6,6 @@
     خرید فایل آپدیت از تعمیرکاران
     @endsection
     @section('css')
-        <style>
             .hide-by-for-you-con {
                 width: 100%;
                 height: 100%;
@@ -27,7 +26,6 @@
                 border-radius: 12px;
                 z-index: 2;
             }
-        </style>
     @endsection
     @section('content')
         <a href="/">

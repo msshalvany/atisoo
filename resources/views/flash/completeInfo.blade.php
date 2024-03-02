@@ -3,7 +3,6 @@
     اطلاعات
 @endsection
 @section('css')
-    <style>
         .form-complete {
             top: 50%;
             margin-top: -200px !important;
@@ -34,7 +33,6 @@
         input[type="file"]::file-selector-button:active {
             background-color: #e5e7eb;
         }
-    </style>
 @endsection
 @section('content')
     <section class="forms-start">

@@ -6,11 +6,9 @@
     جستجوی فایل فلش
 @endsection
 @section('css')
-    <style>
         .section1 {
             margin-top: 120px
         }
-    </style>
 @endsection
 @section('content')
     <a href="/">

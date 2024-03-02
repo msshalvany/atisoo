@@ -118,11 +118,13 @@
             box-shadow: 0 0 12px rgb(98, 98, 98);
             padding: 8px 12px;
         }
-        .link-in-chat{
+
+        .link-in-chat {
             color: rgb(81, 81, 250) !important;
             cursor: pointer;
         }
-        .link-in-chat:hover{
+
+        .link-in-chat:hover {
             color: rgb(33, 33, 248) !important;
             text-decoration: underline;
         }
@@ -174,12 +176,12 @@
             setTimeout(countdown, 1000);
         }
 
-        countdown();    
+        countdown();
     </script>
     <div class="nav-chat navbar">
         <div>
             <form action="{{ route('sendSmsNow', ['id' => $user->id]) }}" method="POST">
-            @csrf
+                @csrf
                 <button class="btn btn-sm btn-danger">ارسال sms</button>
             </form>
         </div>
@@ -245,7 +247,7 @@
                             @php
                                 $admin = \App\Models\admin::find($item->admin_id);
                             @endphp
-                            {{ $admin->username }} :
+                            {{ $admin ? $admin->username : 'ادمین پاک شده' }} :
                             @if ($item->file != null)
                                 <a class="downloade-file-chat" href="/{{ $item->file }}" controls><i
                                         class="fa fa-file"></i></a><br>
@@ -293,7 +295,7 @@
                             @if ($item->voice != null)
                                 <audio src="/{{ $item->voice }}" controls></audio>
                             @endif
-                            <p class="main-text">{!!$item->text!!}</p>
+                            <p class="main-text">{!! $item->text !!}</p>
                             <div class="messege-items-bl">
                                 <i class="fa fa-trash" onclick="messDel(event)" aria-hidden="true"></i>
                                 <i class="fa fa-reply" onclick="changReply(event)" aria-hidden="true"></i>
@@ -513,13 +515,13 @@
                           <span class="messege-time">${
                             formatDateTime(data.masssege.updated_at)
                           }</span>
-                        
+
                     </div>
-                  </div>  
+                  </div>
                   `);
                 } else if (data.type == "file") {
                     $(".texts-container").prepend(`
-                  <div class="maneger-text-con" id="${data.masssege.id}"> 
+                  <div class="maneger-text-con" id="${data.masssege.id}">
                   <img src="/flash/img/maneger.png"alt="">
                     <div class="maneger-text">
                         ${reply ? reply : ""}
@@ -534,11 +536,11 @@
                             formatDateTime(data.masssege.updated_at)
                             }</span>
                     </div>
-                  </div>  
+                  </div>
                   `);
                 } else if (data.type == "text") {
                     $(".texts-container").prepend(`
-                  <div class="maneger-text-con" id="${data.masssege.id}"> 
+                  <div class="maneger-text-con" id="${data.masssege.id}">
                   <img src="/flash/img/maneger.png"alt="">
                     <div class="maneger-text">
                         ${reply ? reply : ""}
@@ -549,9 +551,9 @@
                           <span class="messege-time">${
                             formatDateTime(data.masssege.updated_at)
                           }</span>
-                      </div> 
+                      </div>
                     </div>
-                  </div>  
+                  </div>
                   `);
                 }
                 $(".chat-inputs").trigger("reset");
@@ -606,7 +608,7 @@
                         console.log("recorder stopped");
                         var lastMessege = $(".texts-container").children().eq(0).attr("id");
                         $(".texts-container").prepend(`
-                            <div class="maneger-text-con" id='${lastMessege + 1}'> 
+                            <div class="maneger-text-con" id='${lastMessege + 1}'>
                             <img src="/flash/img/maneger.png"alt="">
                                 <div class="maneger-text">
                                     <div class="messege-items-bl">
@@ -616,7 +618,7 @@
                                     </div>
                                     <audio style='width: 100%' controls src='${audioURL}'/>
                                 </div>
-                            </div>  
+                            </div>
                          `)
                         var formData = new FormData();
                         formData.append("file", audiofile);
@@ -712,7 +714,7 @@
                                     <i class="fa fa-reply"></i>
                                     <span>${replytext}</span>
                                 </div>
-                                
+
                                 `
                     }
                     var image = $('.user-text-con').find('img').attr("src")
@@ -730,13 +732,13 @@
                                         <i class="fa fa-reply" onclick="changReply(event)" aria-hidden="true"></i>
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
                         `);
                         $('.texts-container').scrollTop(200);
 
                     } else if (data.file != null) {
                         $(".texts-container").prepend(`
-                        <div class="user-text-con" id="${data.id}"> 
+                        <div class="user-text-con" id="${data.id}">
                             ${reply}
                             <img src="${image}"alt="">
                             <div class="user-text">
@@ -748,13 +750,13 @@
                                     <i class="fa fa-reply" onclick="changReply(event)" aria-hidden="true"></i>
                                 /div>
                             </div>
-                        </div>  
+                        </div>
                         `);
                         $('.texts-container').scrollTop(200);
 
                     } else if (data.voice != null) {
                         $(".texts-container").prepend(`
-                        <div class="user-text-con" id="${data.id}"> 
+                        <div class="user-text-con" id="${data.id}">
                             <img src="${image}"alt="">
                             <div class="user-text">
                                 ${reply}
@@ -764,13 +766,13 @@
                                     <i class="fa fa-reply" onclick="changReply(event)" aria-hidden="true"></i>
                                 /div>
                             </div>
-                        </div>  
+                        </div>
                         `);
                         $('.texts-container').scrollTop(200);
 
                     } else {
                         $(".texts-container").prepend(`
-                        <div class="user-text-con" id="${data.id}"> 
+                        <div class="user-text-con" id="${data.id}">
                             <img src="${image}"alt="">
                             <div class="user-text">
                                 ${reply}
@@ -781,7 +783,7 @@
                                         <i class="fa fa-reply" onclick="changReply(event)" aria-hidden="true"></i>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         `);
                     }
                     $('.texts-container').scrollTop(200);
@@ -821,11 +823,11 @@
                       ${data.text ? data.text : ""}
                       <span class="messege-time">${formatDateTime(data.updated_at)}</span>
                     </div>
-                  </div>  
+                  </div>
                   `);
                     } else if (data.file != null) {
                         $(".texts-container").append(`
-                  <div class="${user_id}" id="${data.id}"> 
+                  <div class="${user_id}" id="${data.id}">
                   <img src="${user_image}"alt="">
                     <div class="${style_user}">
                       <a class="downloade-file-chat" href="${
@@ -834,12 +836,12 @@
                       ${data.text ? data.text : ""}
                       <span class="messege-time">${formatDateTime(data.updated_at)}</span>
                     </div>
-                  </div>  
+                  </div>
                      <img src="flash/img/maneger.png"alt="">
                `);
                     } else if (data.voice != null) {
                         $(".texts-container").append(`
-                  <div class="${user_id}" id="${data.id}"> 
+                  <div class="${user_id}" id="${data.id}">
                   <img src="${user_image}"alt="">
                     <div class="${style_user}">
                     <audio style="width: 100%" src="/${data.voice}" controls></audio>
@@ -847,19 +849,19 @@
                       <span class="messege-time">${formatDateTime(data.updated_at)}</span>
 
                     </div>
-                  </div>  
+                  </div>
                      <img src="flash/img/maneger.png"alt="">
                `);
                     } else {
                         $(".texts-container").append(`
-                  <div class="${user_id}" id="${data.id}"> 
+                  <div class="${user_id}" id="${data.id}">
                   <img src="${user_image}"alt="">
                     <div class="${style_user}">
                     ${data.text}
                     <span class="messege-time">${formatDateTime(data.updated_at)}</span>
 
                     </div>
-                  </div>  
+                  </div>
                   `);
                     }
                 });
@@ -886,14 +888,17 @@
             $('.fa-reply').css('color', 'black');
             $(e.target).css('color', 'red');
             $('.input-reply').val(reply_id);
-                $('.text-replyed').append(`<div><i class="fa fa-reply" aria-hidden="true"></i>` + text +`</div><i class="fa fa-close text-danger float-end " onclick="cancelRep()" aria-hidden="true"></i>`);
+            $('.text-replyed').append(`<div><i class="fa fa-reply" aria-hidden="true"></i>` + text +
+                `</div><i class="fa fa-close text-danger float-end " onclick="cancelRep()" aria-hidden="true"></i>`);
         }
     }
+
     function cancelRep(target) {
-            $('.fa-reply').css('color', 'black');
-            $('.input-reply').val(0);
-            $('.text-replyed').empty();
-        }
+        $('.fa-reply').css('color', 'black');
+        $('.input-reply').val(0);
+        $('.text-replyed').empty();
+    }
+
     function messDel(e) {
         console.log('messDel');
         var del_id = $(e.target).parents().parents().parents().attr('id')
@@ -932,83 +937,83 @@
     var searchGoToCount = 0
     var ids = []
     $('.search-in-chat-btn').click(function(e) {
-            e.preventDefault();
-            text = $('.search-in-chat-input').val();
-            if (text != '') {
-                var matchingTags = $('.maneger-text-con , .user-text-con ').filter(function() {
-                    return $(this).text().toLowerCase().indexOf(text) != -1;
-                });
-                if (matchingTags.length != 0) {
-                    for (let i = 0; i < matchingTags.length; i++) {
-                        ids[i] = $(matchingTags[i]).attr('id');
-                    }
-                    if (matchingTags.length != 1) {
-                        $('.goTo-f-b-r').fadeIn();
-                    }
-                    console.log(ids);
-                    goTo(ids[0])
-                    $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
-                        left: "+=50",
-                    }, 700);
-                    $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
-                        left: "-=50",
-                    }, 700);
-                } else {
-                    alertEore('موردی یافت نشد')
+        e.preventDefault();
+        text = $('.search-in-chat-input').val();
+        if (text != '') {
+            var matchingTags = $('.maneger-text-con , .user-text-con ').filter(function() {
+                return $(this).text().toLowerCase().indexOf(text) != -1;
+            });
+            if (matchingTags.length != 0) {
+                for (let i = 0; i < matchingTags.length; i++) {
+                    ids[i] = $(matchingTags[i]).attr('id');
                 }
-
-            }
-        });
-        $('.goTo-f-b-r .next-serch-btn').click(function(e) {
-            if (searchGoToCount <= ids.length) {
-                searchGoToCount++
-                e.preventDefault();
-                $('.texts-container').scrollTop($('.texts-container')[0].scrollHeight);
-                goTo(ids[searchGoToCount])
+                if (matchingTags.length != 1) {
+                    $('.goTo-f-b-r').fadeIn();
+                }
+                console.log(ids);
+                goTo(ids[0])
                 $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
                     left: "+=50",
                 }, 700);
                 $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
                     left: "-=50",
                 }, 700);
-                console.log(ids[searchGoToCount]);
             } else {
-                searchGoToCount = 0
-                ids = []
-                $('.goTo-f-b-r').fadeOut();
-                $('.search-in-chat-input').val('');
-                alertEore('موردی نیست')
+                alertEore('موردی یافت نشد')
             }
-        });
-        $('.goTo-f-b-r .prev-serch-btn').click(function(e) {
-            if (searchGoToCount >= 0) {
-                searchGoToCount--
-                e.preventDefault();
-                $('.texts-container').scrollTop($('.texts-container')[0].scrollHeight);
-                goTo(ids[searchGoToCount])
-                $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
-                    left: "+=50",
-                }, 700);
-                $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
-                    left: "-=50",
-                }, 700);
-                console.log(ids[searchGoToCount]);
-            }else{
-                searchGoToCount = 0
-                ids = []
-                $('.texts-container').scrollTop($('.texts-container')[0].scrollHeight);
-                $('.goTo-f-b-r').fadeOut();
-                $('.search-in-chat-input').val('');
-                alertEore('موردی نیست')
-            }
-        });
-        $('.goTo-f-b-r .stop-search').click(function(e) {
+
+        }
+    });
+    $('.goTo-f-b-r .next-serch-btn').click(function(e) {
+        if (searchGoToCount <= ids.length) {
+            searchGoToCount++
+            e.preventDefault();
             $('.texts-container').scrollTop($('.texts-container')[0].scrollHeight);
+            goTo(ids[searchGoToCount])
+            $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
+                left: "+=50",
+            }, 700);
+            $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
+                left: "-=50",
+            }, 700);
+            console.log(ids[searchGoToCount]);
+        } else {
             searchGoToCount = 0
             ids = []
             $('.goTo-f-b-r').fadeOut();
             $('.search-in-chat-input').val('');
-        });
+            alertEore('موردی نیست')
+        }
+    });
+    $('.goTo-f-b-r .prev-serch-btn').click(function(e) {
+        if (searchGoToCount >= 0) {
+            searchGoToCount--
+            e.preventDefault();
+            $('.texts-container').scrollTop($('.texts-container')[0].scrollHeight);
+            goTo(ids[searchGoToCount])
+            $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
+                left: "+=50",
+            }, 700);
+            $(`#${ids[searchGoToCount]} .user-text , #${ids[searchGoToCount]} .maneger-text`).animate({
+                left: "-=50",
+            }, 700);
+            console.log(ids[searchGoToCount]);
+        } else {
+            searchGoToCount = 0
+            ids = []
+            $('.texts-container').scrollTop($('.texts-container')[0].scrollHeight);
+            $('.goTo-f-b-r').fadeOut();
+            $('.search-in-chat-input').val('');
+            alertEore('موردی نیست')
+        }
+    });
+    $('.goTo-f-b-r .stop-search').click(function(e) {
+        $('.texts-container').scrollTop($('.texts-container')[0].scrollHeight);
+        searchGoToCount = 0
+        ids = []
+        $('.goTo-f-b-r').fadeOut();
+        $('.search-in-chat-input').val('');
+    });
 
     $('.show-radey-mess-btn').click(function(e) {
         e.preventDefault();

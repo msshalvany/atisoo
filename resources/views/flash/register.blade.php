@@ -3,19 +3,15 @@
     ثبت نام
 @endsection
 @section('css')
-    <style>
-        
-
         .forms-start form {
 
             height: 220px !important;
 
         }
-    </style>
 @endsection
 @section('content')
     <section class="forms-start">
-        
+
         <div class="eroore">شما خطا دارید</div>
         <div class="sucses">بلیت شما رزرو شد</div>
         <form class="form-1" action="">

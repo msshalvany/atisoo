@@ -3,7 +3,6 @@
     درباره ما
 @endsection
 @section('css')
-    <style>
         .abute-dic {
             padding: 120px;
             margin: -120px 0 0 0
@@ -14,7 +13,6 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-    </style>
 @endsection
 @section('content')
     <a href="/">

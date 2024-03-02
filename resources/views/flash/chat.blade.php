@@ -3,7 +3,6 @@
     چت با مدریت
 @endsection
 @section('css')
-    <style>
         .chat-icon {
             display: none;
         }
@@ -34,8 +33,6 @@
             color: rgb(33, 33, 248);
             text-decoration: underline;
         }
-        
-    </style>
 @endsection
 @section('content')
     @php
@@ -252,11 +249,11 @@
                                     <span class="messege-time">${formatDateTime(data.updated_at)}</span>
                                 </div>
                                 </div>
-                            </div>  
+                            </div>
                         `);
                         } else if (data.file != null) {
                             $(".texts-container").append(`
-                            <div class="${user_id}" id="${data.id}"> 
+                            <div class="${user_id}" id="${data.id}">
                             <img src="${user_image}"alt="">
                                 <div class="${style_user}">
                                 <a class="downloade-file-chat" href="${
@@ -268,11 +265,11 @@
                                     <span class="messege-time">${formatDateTime(data.updated_at)}</span>
                                 </div>
                                 </div>
-                            </div>  
+                            </div>
                         `);
                         } else if (data.voice != null) {
                             $(".texts-container").append(`
-                            <div class="${user_id}" id="${data.id}"> 
+                            <div class="${user_id}" id="${data.id}">
                             <img src="${user_image}"alt="">
                                 <div class="${style_user}">
                                 <audio style="width: 100%" src="${data.voice}" controls></audio>
@@ -282,11 +279,11 @@
                                     <span class="messege-time">${formatDateTime(data.updated_at)}</span>
                                 </div>
                                 </div>
-                            </div>  
+                            </div>
                         `);
                         } else {
                             $(".texts-container").append(`
-                            <div class="${user_id}" id="${data.id}"> 
+                            <div class="${user_id}" id="${data.id}">
                             <img src="${user_image}"alt="">
                                 <div class="${style_user}">
                                 <p>${data.text ? data.text : ""}</p>
@@ -295,7 +292,7 @@
                                     <span class="messege-time">${formatDateTime(data.updated_at)}</span>
                                 </div>
                                 </div>
-                            </div>  
+                            </div>
                         `);
                         }
                     });
@@ -357,7 +354,7 @@
                             console.log("recorder stopped");
                             var lastMessege = $(".texts-container").children().eq(0).attr("id");
                             $(".texts-container").prepend(`
-                                <div class="user-text-con" id='${eval(lastMessege) + 1}'> 
+                                <div class="user-text-con" id='${eval(lastMessege) + 1}'>
                                 <img src="${user_image}" alt="">
                                     <div class="user-text">
                                         <audio style='width: 100%' controls src='${audioURL}'/>
@@ -367,7 +364,7 @@
                                         <i class="fa fa-reply" onclick="changReply(event)" aria-hidden="true"></i>
                                         <span class="messege-time"></span>
                                     </div>
-                                </div>  
+                                </div>
                             `);
                             var formData = new FormData();
                             formData.append("file", audiofile);
@@ -455,7 +452,7 @@
                                         <i class="fa fa-reply"></i>
                                         <span>${replytext}</span>
                                     </div>
-                                
+
                                 `
                         }
                         if (data.image != null) {
@@ -469,13 +466,13 @@
                                         <div class="messege-items-bl">
                                             <i class="fa fa-reply" onclick='changReply(event)'  aria-hidden="true"></i>
                                             <span class="messege-time">${formatDateTime(data.updated_at)}</span>
-                                        </div>                                        
                                         </div>
-                                    </div>  
+                                        </div>
+                                    </div>
                         `);
                         } else if (data.file != null) {
                             $(".texts-container").prepend(`
-                                    <div class="maneger-text-con" id="${data.id}"> 
+                                    <div class="maneger-text-con" id="${data.id}">
                                     ${reply}
                                     <img src="flash/img/maneger.png"alt="">
                                         <div class="maneger-text">
@@ -484,13 +481,13 @@
                                             <div class="messege-items-bl">
                                                 <i class="fa fa-reply" onclick='changReply(event)'  aria-hidden="true"></i>
                                                 <span class="messege-time">${formatDateTime(data.updated_at)}</span>
-                                            </div>     
+                                            </div>
                                         </div>
-                                    </div>  
+                                    </div>
                         `);
                         } else if (data.voice != null) {
-                            $(".texts-container").prepend(`   
-                                    <div class="maneger-text-con" id="${data.id}"> 
+                            $(".texts-container").prepend(`
+                                    <div class="maneger-text-con" id="${data.id}">
                                         ${reply}
                                         <img src="flash/img/maneger.png"alt="">
                                         <div class="maneger-text">
@@ -501,13 +498,13 @@
                                             <div class="messege-items-bl">
                                                 <i class="fa fa-reply" onclick='changReply(event)' aria-hidden="true"></i>
                                                 <span class="messege-time">${formatDateTime(data.updated_at)}</span>
-                                            </div>                                                                               
+                                            </div>
                                         </div>
-                                    </div>  
+                                    </div>
                         `);
                         } else {
                             $(".texts-container").prepend(`
-                                    <div class="maneger-text-con" id="${data.id}"> 
+                                    <div class="maneger-text-con" id="${data.id}">
                                         <img src="flash/img/maneger.png"alt="">
                                         <div class="maneger-text">
                                             ${reply}
@@ -515,9 +512,9 @@
                                                 <div class="messege-items-bl">
                                                     <i class="fa fa-reply" onclick='changReply(event)' aria-hidden="true"></i>
                                                     <span class="messege-time">${formatDateTime(data.updated_at)}</span>
-                                                </div>        
+                                                </div>
                                         </div>
-                                    </div>  
+                                    </div>
                         `);
                         }
                     }

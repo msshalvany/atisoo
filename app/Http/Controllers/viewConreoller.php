@@ -36,15 +36,15 @@ class viewConreoller extends Controller
         // Artisan::call('optimize');
         // $atisoo_phon =  Crypt::decrypt(Cookie::get('atisoo_phon'));
         if (Cookie::has('atisoo_phon') && Cookie::has('atisoo_password') || !session()->has('user')) {
-            $atisoo_phon =  Cookie::get('atisoo_phon');
+            $atisoo_phon = Cookie::get('atisoo_phon');
             $atisoo_password = Cookie::get('atisoo_password');
-            $user = User::where('phon', $atisoo_phon)->where('password',$atisoo_password)->first();
+            $user = User::where('phon', $atisoo_phon)->where('password', $atisoo_password)->first();
             if ($user) {
                 session(['user' => $user->id]);
             }
         }
         $userCount = count(user::all());
-        $fileCount = count(device::all());      
+        $fileCount = count(device::all());
         $info = info::first();
         return view('flash.index', ['info' => $info, 'fileCount' => $fileCount, 'userCount' => $userCount]);
     }
@@ -68,9 +68,9 @@ class viewConreoller extends Controller
 
     public function shopPage()
     {
-        $deviceShop =  shop::where('userId', session()->get('user'))->get();
-        $deviceByed =  byed::where('userId', session()->get('user'))->get();
-        byed::where("created_at", '<=',  Carbon::now()->subDays(5))->delete();
+        $deviceShop = shop::where('userId', session()->get('user'))->get();
+        $deviceByed = byed::where('userId', session()->get('user'))->get();
+        byed::where("created_at", '<=', Carbon::now()->subDays(5))->delete();
         return view('flash.shopPage', ['deviceShop' => $deviceShop, 'deviceByed' => $deviceByed]);
     }
 
@@ -99,27 +99,32 @@ class viewConreoller extends Controller
         $device = device::paginate(250);
         return view('admin.flash.list', ['device' => $device]);
     }
+
     public function flashShow($id)
     {
         $device = device::find($id);
         $comment = Comment::where('device_id', $id)->get();
         return view('admin.flash.show', ['device' => $device, 'comment' => $comment]);
     }
+
     public function fileUpdateList()
     {
         $device = UpdateFile::paginate(250);
         return view('admin.fileUpdate.list', ['device' => $device]);
     }
+
     public function fileUpdateShow($id)
     {
         $device = UpdateFile::find($id);
         $comment = Comment::where('device_id', $id)->get();
         return view('admin.fileUpdate.show', ['device' => $device, 'comment' => $comment]);
     }
+
     public function resePassVwie()
     {
         return view('flash.resetPass');
     }
+
     public function infoVwie()
     {
         $info = info::first();
@@ -141,12 +146,13 @@ class viewConreoller extends Controller
                 ->orWhere('description', 'like', '%' . $request->text . '%')
                 ->orWhere('ic', 'like', '%' . $request->text . '%')->paginate(20);
         }
-        $info  = info::first();
+        $info = info::first();
         $userCount = count(user::all());
         $fileCount = count(device::all());
         $info = info::first();
         return view('flash.searchFlash', ['device' => $device, 'info' => $info, 'fileCount' => $fileCount, 'userCount' => $userCount]);
     }
+
     public function searchUpdate(Request $request)
     {
         $device = 'null';
@@ -160,89 +166,106 @@ class viewConreoller extends Controller
                 ->orWhere('description', 'like', '%' . $request->text . '%')
                 ->orWhere('ic', 'like', '%' . $request->text . '%')->paginate(20);
         }
-        $info  = info::first();
+        $info = info::first();
         $userCount = count(user::all());
         $fileCount = count(UpdateFile::all());
         $info = info::first();
         return view('flash.searchUpdate', ['device' => $device, 'info' => $info, 'fileCount' => $fileCount, 'userCount' => $userCount]);
     }
+
     public function searchViwe()
     {
         $info = info::first();
         $fileCount = count(device::all());
         return view('flash.searchFlash', ['info' => $info, 'device' => 'null', 'fileCount' => $fileCount]);
     }
+
     public function searchUpdateViwe()
     {
         $info = info::first();
         $fileCount = count(UpdateFile::all());
         return view('flash.searchUpdate', ['info' => $info, 'device' => 'null', 'fileCount' => $fileCount]);
     }
+
     public function abute()
     {
         return view('flash.abute');
     }
+
     public function byForYouList()
     {
         $device = byForYou::where('hide', 0)->get();
         return view('admin.byForYou.list', ['device' => $device]);
     }
+
     public function byForYouInsertViwe()
     {
         return view('admin.byForYou.insert');
     }
+
     public function byForYouUpdateFileList()
     {
         $device = byForYouUpdate::where('hide', 0)->get();
         return view('admin.byForYouUpdate.list', ['device' => $device]);
     }
+
     public function byForYouUpdateFileInsertViwe()
     {
         return view('admin.byForYouUpdate.insert');
     }
+
     public function byForYouImage(Request $request)
     {
         return view('admin.byForYou.image', ['idDevice' => $request->idDevice]);
     }
+
     public function byForYouUpdateFileImage(Request $request)
     {
         return view('admin.byForYouUpdate.image', ['idDevice' => $request->idDevice]);
     }
+
     public function byForYou()
     {
         $info = info::first();
         return view('flash.byForYou', ['device' => byForYou::orderBy('sort')->get(), 'info' => $info]);
     }
+
     public function byForYouUpdateFile()
     {
         $info = info::first();
         return view('flash.byForYouUpdateFile', ['device' => byForYouUpdate::orderBy('sort')->get(), 'info' => $info]);
     }
+
     public function resetCam()
     {
         $info = info::first();
         return view('flash.resetCam', ['device' => rsetCam::orderBy('sort')->get(), 'info' => $info]);
     }
+
     public function resetDevice()
     {
         $info = info::first();
         return view('flash.resetDevice', ['device' => rsetDevice::orderBy('sort')->get(), 'info' => $info]);
     }
+
     public function packegeL()
     {
         $info = info::first();
-        return view('flash.packege', ['packege' => packege::get(), 'info' => $info]);
+        return view('flash.packege', ['packege' => packege::orderBy('sort')->get(), 'info' => $info]);
     }
+
     public function cooperateL()
     {
         $info = info::first();
-        return view('flash.cooperate', ['cooperate' => cooperate::get(), 'info' => $info]);
+        return view('flash.cooperate', ['cooperate' => cooperate::orderBy('sort')->get(), 'info' => $info]);
     }
+
     public function katalogL()
     {
         $info = info::first();
-        return view('flash.katalog', ['katalog' => katalog::get(), 'info' => $info]);
+        return view('flash.katalog', ['katalog' => katalog::orderBy('sort')->get(), 'info' => $info]);
     }
+
     public function showDevice($id)
     {
         $info = info::first();
@@ -250,6 +273,7 @@ class viewConreoller extends Controller
         $comment = Comment::where('device_id', $device->id2)->get();
         return view('flash.showDevice', ['device' => $device, 'comment' => $comment, 'info' => $info]);
     }
+
     public function showDeviceUpdate($id)
     {
         $info = info::first();
@@ -257,12 +281,14 @@ class viewConreoller extends Controller
         $comment = Comment::where('device_id', $device->id2)->get();
         return view('flash.showDeviceUpdate', ['device' => $device, 'comment' => $comment, 'info' => $info]);
     }
+
     public function userList()
     {
         $user = user::paginate(1000);
         $count = count(user::all());
         return view('admin.userList', ['user' => $user, 'count' => $count]);
     }
+
     public function userSearch(Request $request)
     {
         $user = user::where('id', 'like', '%' . $request->text . '%')
@@ -274,6 +300,7 @@ class viewConreoller extends Controller
         $count = count($user);
         return view('admin.userList', ['user' => $user, 'count' => $count]);
     }
+
     public function flashSearch(Request $request)
     {
         $device = 'null';
@@ -290,6 +317,7 @@ class viewConreoller extends Controller
         }
         return view('admin.flash.list', ['device' => $device]);
     }
+
     public function fileUpdateSearch(Request $request)
     {
         $device = 'null';
@@ -306,8 +334,9 @@ class viewConreoller extends Controller
         }
         return view('admin.fileUpdate.list', ['device' => $device]);
     }
+
     public function chate()
-    {   
+    {
         $user = user::find(session()->get('user'));
         if ($user->name == "نامشخص" || $user->name == null || $user->name == '') {
             return View('flash.completeInfo');
@@ -325,11 +354,13 @@ class viewConreoller extends Controller
             return View('flash.chat', ['user' => $user, 'messegs' => $messegs, 'time' => $time]);
         }
     }
+
     public function ruls()
     {
         $info = info::first();
         return view('flash.ruls', ['info' => $info]);
     }
+
     public function panel()
     {
         $user = user::find(session()->get('user'));

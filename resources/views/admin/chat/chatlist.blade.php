@@ -216,7 +216,7 @@
                     <div>
                         <div style="font-weight: bold;font-size: 20px">{{ $user->name }}</div>
                         <div style="font-weight: bold;font-size: 12px">{{ $user->phon }}</div>
-                        <p>{!! $item->text !!}</p>
+                        <p>{{ $item->text }}</p>
                     </div>
                     <div style="position: relative;">
                         {{-- <img width="" style="border-radius:50%;order: 2" src="/{{ $user->image }}" alt=""> --}}

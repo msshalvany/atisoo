@@ -126,7 +126,7 @@
                             @if ($item->voice != null)
                                 <audio style='width: 100%' src="{{ $item->voice }}" controls></audio>
                             @endif
-                            <p class="main-text">{!! $item->text !!}</p>
+                            <p class="main-text">{{ $item->text }}</p>
                             <div class="messege-items-bl">
                                 <i class="fa fa-trash" onclick="messDel(event)" aria-hidden="true"></i>
                                 <i class="fa fa-reply" onclick="changReply(event)" aria-hidden="true"></i>
@@ -573,7 +573,7 @@
         function goTo(id) {
             $('.texts-container').animate({
                 scrollTop: $(`#${id}`).offset().top - 200
-            }, 00);
+            }, 0);
         }
         var searchGoToCount = 0
         var ids = []
